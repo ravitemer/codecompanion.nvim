@@ -322,7 +322,8 @@ function Adapter.resolve(adapter)
     adapter = Adapter.new(adapter)
   elseif type(adapter) == "string" then
     local name = adapter
-    adapter = Adapter.extend(adapter)
+    local user_adapter = config.adapters[name]
+    adapter = Adapter.extend(user_adapter or adapter)
     adapter.name = name
   elseif type(adapter) == "function" then
     adapter = adapter()
